@@ -9,5 +9,5 @@ const PORT =5000;
 app.use(bodyPaeser.json());
 
 app.listen(PORT,()=>{
-    console.log("server is up and running on port "+port)
+    console.log("server is up and running on port "+PORT)
 });
