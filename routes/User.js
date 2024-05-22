@@ -32,6 +32,16 @@ router.get('/:id', async (req, res) => {
         res.status(500).send(err);
     }
 });
+// Update an user by ID
+router.put('/:id', async (req, res) => {
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!user) return res.status(404).send();
+        res.status(200).send(user);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
 
 
 module.exports = router;
