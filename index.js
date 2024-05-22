@@ -1,30 +1,30 @@
-const express=require("express");
-const bodyPaeser=require("body-parser");
-const cors=require("cors");
-const mongoose=require("mongoose");
-//const userRouter =require('./routes/User.js');
+const express = require("express");
+const bodyParser = require("body-parser"); 
+const cors = require("cors");
+const mongoose = require("mongoose");
+const userRouter = require('./Routes/user');
 
-const app=express();
+
+const app = express();
+const PORT = 4000;
+
+
 app.use(cors());
+app.use(bodyParser.json());
 
-const PORT =4000;
-app.use(bodyPaeser.json());
+
+app.use('/user', userRouter);
+
 
 app.get('/', (req, res) => res.send('Home Page'));
 
-app.get('/users',(req,res) =>{
-    
+
+const mongodbUrl = 'mongodb+srv://nipunalahiru2000:password2000@cluster0.pmcaqag.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Cluster0';
+
+mongoose.connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
-
-app.post('/user',(req,res) =>{
-    console.log(req.body);
-})
-
-
-mongoose.set('strictQuery',false);
-const mongodbUrl='mongodb+srv://nipunalahiru2000:password2000@cluster0.pmcaqag.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Cluster0';
-
-mongoose.connect(mongodbUrl)
 .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {
